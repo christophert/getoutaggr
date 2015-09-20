@@ -71,7 +71,7 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                                                 finalDict["places"]["poi"] = attractionplace;
                                                 console.log(finalDict["places"]["poi"]);
                                                 if(finalDict["places"]["poi"]) {
-                                                    finalDict["totalCost"] = parseFloat(finalDict["flights"]["inbound"].cost) + (parseFloat(finalDict["flights"]["outbound"].cost - parseFloat(finalDict["flights"]["inbound"].cost)) + (parseFloat(finalDict["hotel"].price) * parseInt(howlong)));
+                                                    finalDict["totalCost"] = parseFloat(finalDict["flights"]["inbound"].cost) + (parseFloat(finalDict["flights"]["outbound"].cost) - parseFloat(finalDict["flights"]["inbound"].cost)) + (parseFloat(finalDict["hotel"].price) * parseInt(howlong));
                                                     res.send(finalDict);
                                                 }
                                             });
