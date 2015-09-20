@@ -52,6 +52,7 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
             finalDict['totalCost'] = 0;
             request('https://gogogogo.co/api/flights/'+fromAirportCode+'/'+toAirportCode+'/'+now+'/'+later+'/inbound/1', function(error, response, body) {
                 if(!error && response.statusCode == 200) {
+                    finalDict["flights"] = {};
                     finalDict["flights"]["inbound"] = JSON.parse(body);
                     finalDict['totalCost'] += finalDict["flights"]["inbound"].cost;
                     request('https://gogogogo.co/api/flights/'+fromAirportCode+'/'+toAirportCode+'/'+now+'/'+later+'/outbound/1', function(error, response, body) {
