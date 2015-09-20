@@ -67,7 +67,7 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                                         var attractionplace = JSON.parse(body);
                                         finalDict["places"]["poi"] = attractionplace;
                                         console.log(finalDict["places"]["poi"]);
-                                        if(finalDict["places"]["poi"]) {
+                                        if(finalDict["places"]["poi"] && finalDict['totalCost'] > 0) {
                                             res.send(finalDict);
                                         }
                                     });
