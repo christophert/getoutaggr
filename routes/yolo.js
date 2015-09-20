@@ -49,16 +49,14 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
             var finalDict = {};
             finalDict['from'] = fromCity;
             finalDict['to'] = toCity;
-            finalDict['totalCost'] = 0;
             request('https://gogogogo.co/api/flights/'+fromAirportCode+'/'+toAirportCode+'/'+now+'/'+later+'/inbound/1', function(error, response, body) {
                 if(!error && response.statusCode == 200) {
                     finalDict["flights"] = {};
                     finalDict["flights"]["inbound"] = JSON.parse(body);
-                    finalDict['totalCost'] += finalDict["flights"]["inbound"].cost;
+                    finalDict['totalCost'] + finalDict["flights"]["inbound"].cost;
                     request('https://gogogogo.co/api/flights/'+fromAirportCode+'/'+toAirportCode+'/'+now+'/'+later+'/outbound/1', function(error, response, body) {
                         if(!error && response.statusCode == 200) {
                             finalDict["flights"]["outbound"] = JSON.parse(body);
-                            finalDict['totalCost'] += finalDict["flights"]["outbound"].cost;
                             request('https://gogogogo.co/api/hotels/'+whereTo+'/'+now+'/'+later, function(error, response, body) {
                                 if(!error && response.statusCode == 200) {
                                     finalDict["hotel"] = JSON.parse(body);
@@ -73,6 +71,7 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                                                 finalDict["places"]["poi"] = attractionplace;
                                                 console.log(finalDict["places"]["poi"]);
                                                 if(finalDict["places"]["poi"]) {
+                                                    finalDict["totalCost"] = finalDict["flights"]["inbound"].cost + (finalDict["hotel"].price * howlong);
                                                     res.send(finalDict);
                                                 }
                                             });
