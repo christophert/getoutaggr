@@ -61,6 +61,7 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                                     request('http://gogogogo.co/api/places/'+whereTo+'/attractions', function(error, response, body) {
                                         var attractionplace = JSON.parse(body);
                                         finalDict["places"]["poi"] = attractionplace;
+                                        console.log(finalDict["places"]["poi"]);
                                         if(finalDict["places"]["poi"]) {
                                             res.send(finalDict);
                                         }
