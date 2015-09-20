@@ -55,10 +55,13 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                             finalDict["hotel"] = JSON.parse(body);
                             request('http://gogogogo.co/api/places/'+whereTo+'/food', function(error, response, body) {
                                 if(!error && response.statusCode == 200) {
-                                    finalDict["places"] = JSON.parse(body);
-                                    if(finalDict["places"]) {
-                                        res.send(finalDict);
-                                    }
+                                    finalDict["places"] = [JSON.parse(body)];
+                                    request('http://gogogogo.co/api/places/'+whereTo+'/things to see', function(error, response, body) {
+                                        finalDict["places"].push(JSON.parse(body));
+                                        if(finalDict["places"].length > 1) {
+                                            res.send(finalDict);
+                                        }
+                                    });
                                 } else {
                                     return error;
                                 }
