@@ -23,25 +23,30 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                     return {
                         'id': airport.id,
                         'name': airport.itemName,
+                        'city': airport.cityName,
                         'score': airport.score
                     };
                 });
                 // console.log(airports);
                 // console.log(_.max(airports, 'score').id);
                 if(typeof(_callback) == "function") {
-                    _callback(_.max(airports, 'score').id);
+                    _callback(_.max(airports, 'score'));
                 }
             }
         });
     }
 
-    var fromAirportCode, toAirportCode;
-    _toAirportCode(whereFrom, function(id) {
-        fromAirportCode = id;
-        _toAirportCode(whereTo, function(id) {
-            toAirportCode = id;
+    var fromAirportCode, toAirportCode, fromCity, toCity;
+    _toAirportCode(whereFrom, function(airport) {
+        fromAirportCode = airport.id;
+        fromCity = airport.city;
+        _toAirportCode(whereTo, function(airport) {
+            toAirportCode = airport.id;
+            toCity = airport.city;
             
             var finalDict = {};
+            finalDict['from'] = fromCity;
+            finalDict['to'] = toCity;
             request('http://gogogogo.co/api/flights/'+fromAirportCode+'/'+toAirportCode+'/'+now+'/'+later, function(error, response, body) {
                 if(!error && response.statusCode == 200) {
                     finalDict["flights"] = JSON.parse(body);
