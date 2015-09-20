@@ -83,6 +83,8 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                                     return error;
                                 }
                             });
+                        }
+                    });
                 }
                 else {
                     return error;
