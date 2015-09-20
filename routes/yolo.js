@@ -3,6 +3,8 @@
  var router = express.Router();
  var request = require('request');
  var moment = require('moment');
+ 
+ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 
 router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
