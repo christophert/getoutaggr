@@ -55,9 +55,9 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                             finalDict["hotel"] = JSON.parse(body);
                             request('http://gogogogo.co/api/places/'+whereTo+'/food', function(error, response, body) {
                                 if(!error && response.statusCode == 200) {
-                                    var foodplaace = JSON.parse(body);
+                                    var foodplace = JSON.parse(body);
                                     foodplace["type"] = "food";
-                                    finalDict["places"] = [foodplaace];
+                                    finalDict["places"] = [foodplace];
                                     request('http://gogogogo.co/api/places/'+whereTo+'/things to see', function(error, response, body) {
                                         var attractionplace = JSON.parse(body);
                                         attractionplace["type"] = "poi";
