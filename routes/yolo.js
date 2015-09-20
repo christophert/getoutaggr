@@ -67,16 +67,16 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                                         }
                                     });
                                 } else {
-                                    return error;
+                                    res.send(error);
                                 }
                             });
                         } else {
-                            return error;
+                            res.send(error);
                         }
                     });
                 }
                 else {
-                    return error;
+                    res.send(error);
                 }
             });
         });
