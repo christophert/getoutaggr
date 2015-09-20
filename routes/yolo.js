@@ -56,7 +56,9 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                             request('http://gogogogo.co/api/places/'+whereTo+'/food', function(error, response, body) {
                                 if(!error && response.statusCode == 200) {
                                     finalDict["places"] = JSON.parse(body);
-                                    res.send(finalDict);
+                                    if(finalDict["places"]) {
+                                        res.send(finalDict);
+                                    }
                                 } else {
                                     return error;
                                 }
