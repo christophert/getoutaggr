@@ -52,7 +52,7 @@ router.get('/yolo/:howlong/:from/:to', function(req, res, next) {
                     finalDict["flights"] = JSON.parse(body);
                     request('http://gogogogo.co/api/hotels/'+whereTo+'/'+now+'/'+later, function(error, response, body) {
                         if(!error && response.statusCode == 200) {
-                            finalDict["hotels"] = JSON.parse(body);
+                            finalDict["hotel"] = JSON.parse(body);
                             request('http://gogogogo.co/api/places/'+whereTo+'/food', function(error, response, body) {
                                 if(!error && response.statusCode == 200) {
                                     finalDict["places"] = JSON.parse(body);
